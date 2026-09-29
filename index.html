@@ -1,0 +1,575 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Saturday Plans?</title>
+<meta name="description" content="A very serious question. Please answer honestly (yes).">
+<meta property="og:title" content="I have a very serious question for you">
+<meta property="og:description" content="Saturday, 3 October. Ahmedabad. Tap to answer (correctly).">
+<meta property="og:image" content="photos/patang.jpg">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,700;12..96,800&family=Figtree:wght@400;500;600;700&family=JetBrains+Mono:wght@500;700&display=swap">
+<style>
+/* Layout: one centered "stage" card per step, kites drifting over an Ahmedabad dusk sky. */
+:root{
+  --sky:#FFE3D3;        /* peach dusk */
+  --sky-2:#FFD0B8;
+  --ink:#1E1B3A;        /* deep indigo ink */
+  --ink-soft:#5A5478;
+  --paper:#FFFBF7;
+  --pink:#FF3D7F;       /* kite pink, main accent */
+  --marigold:#FFB627;
+  --teal:#11A39C;
+  --line:rgba(30,27,58,.12);
+  --display:"Bricolage Grotesque", "Arial Rounded MT Bold", system-ui, sans-serif;
+  --body:"Figtree", system-ui, -apple-system, "Segoe UI", sans-serif;
+  --mono:"JetBrains Mono", ui-monospace, Menlo, monospace;
+  --r:22px;
+  color-scheme:light;
+}
+*{box-sizing:border-box}
+html,body{margin:0;min-height:100%}
+body{
+  font-family:var(--body);color:var(--ink);
+  background:
+    radial-gradient(1200px 600px at 80% -10%, #FFC6A8 0%, transparent 60%),
+    radial-gradient(900px 500px at -10% 110%, #FFD6E4 0%, transparent 60%),
+    var(--sky);
+  background-attachment:fixed;
+  padding:max(20px, env(safe-area-inset-top)) 16px max(28px, env(safe-area-inset-bottom));
+  overflow-x:hidden;
+  -webkit-font-smoothing:antialiased;
+}
+button{font:inherit;color:inherit}
+:focus-visible{outline:3px solid var(--pink);outline-offset:3px;border-radius:8px}
+
+/* ---------- kites ---------- */
+.kites{position:fixed;inset:0;pointer-events:none;z-index:0;overflow:hidden}
+.kite{position:absolute;width:var(--s,54px);animation:drift var(--d,14s) ease-in-out infinite alternate;opacity:.9}
+.kite svg{width:100%;height:auto;display:block;overflow:visible}
+@keyframes drift{
+  0%{transform:translate(0,0) rotate(-8deg)}
+  50%{transform:translate(18px,-22px) rotate(6deg)}
+  100%{transform:translate(-14px,10px) rotate(-3deg)}
+}
+
+/* ---------- stage ---------- */
+main{position:relative;z-index:1;max-width:980px;margin:0 auto}
+.brand{display:flex;justify-content:space-between;align-items:center;gap:12px;margin-bottom:22px;font-family:var(--mono);font-size:12px;letter-spacing:.08em;text-transform:uppercase;color:var(--ink-soft)}
+.brand b{color:var(--ink)}
+.dots{display:flex;gap:6px}
+.dots i{width:22px;height:6px;border-radius:9px;background:var(--line);transition:background .3s,width .3s}
+.dots i.on{background:var(--ink);width:34px}
+
+.step{display:none}
+.step.active{display:block;animation:rise .55s cubic-bezier(.2,.9,.25,1.2)}
+@keyframes rise{from{opacity:0;transform:translateY(18px) scale(.98)}to{opacity:1;transform:none}}
+
+.card{
+  background:var(--paper);border-radius:32px;
+  box-shadow:0 1px 0 rgba(255,255,255,.8) inset, 0 30px 80px -30px rgba(90,40,60,.35), 0 0 0 1px var(--line);
+  padding:clamp(24px,5vw,56px);
+}
+
+h1,h2{font-family:var(--display);letter-spacing:-.03em;line-height:.98;margin:0;text-wrap:balance}
+h1{font-size:clamp(40px,8.5vw,88px);font-weight:800}
+h2{font-size:clamp(30px,5.6vw,52px);font-weight:800}
+.eyebrow{font-family:var(--mono);font-size:12px;letter-spacing:.14em;text-transform:uppercase;color:var(--pink);font-weight:700;margin:0 0 14px}
+.lead{font-size:clamp(17px,2.2vw,20px);line-height:1.5;color:var(--ink-soft);max-width:36ch;margin:18px 0 0}
+.hl{background:linear-gradient(transparent 58%, rgba(255,182,39,.55) 58%);padding:0 .08em}
+.pink{color:var(--pink)}
+
+/* ---------- step 1: the question ---------- */
+.ask{display:grid;grid-template-columns:1.15fr .85fr;gap:clamp(20px,4vw,48px);align-items:center}
+.date-chip{display:inline-flex;align-items:center;gap:10px;margin-top:26px;padding:10px 16px 10px 10px;border-radius:999px;background:var(--ink);color:#fff;font-weight:600;font-size:15px}
+.date-chip .cal{display:grid;place-items:center;width:38px;height:38px;border-radius:50%;background:var(--marigold);color:var(--ink);font-family:var(--display);font-weight:800;font-size:17px;line-height:1}
+.arena{position:relative;min-height:320px;border-radius:26px;background:
+  repeating-linear-gradient(135deg, rgba(255,61,127,.06) 0 14px, transparent 14px 28px), #FFF1EA;
+  box-shadow:0 0 0 1.5px var(--line) inset;display:grid;place-items:center;overflow:hidden}
+.arena-inner{display:flex;flex-direction:column;align-items:center;gap:14px;padding:20px;text-align:center}
+.arena-q{font-family:var(--display);font-weight:700;font-size:22px;letter-spacing:-.02em}
+.btns{display:flex;gap:12px;align-items:center;justify-content:center;flex-wrap:wrap}
+.btn{border:0;cursor:pointer;border-radius:999px;padding:16px 28px;font-weight:700;font-size:17px;transition:transform .2s cubic-bezier(.2,.9,.25,1.4), box-shadow .2s, background .2s}
+.btn:active{transform:scale(.96)}
+.btn-yes{background:var(--pink);color:#fff;box-shadow:0 10px 24px -8px rgba(255,61,127,.7);transform:scale(var(--grow,1))}
+.btn-yes:hover{box-shadow:0 14px 30px -8px rgba(255,61,127,.85)}
+.btn-no{background:#fff;color:var(--ink);box-shadow:0 0 0 1.5px var(--line) inset;white-space:nowrap}
+.btn-no.loose{position:absolute;max-width:calc(100% - 16px);white-space:normal;transition:left .28s cubic-bezier(.2,.9,.25,1.3), top .28s cubic-bezier(.2,.9,.25,1.3), transform .2s}
+.nocount{font-family:var(--mono);font-size:12px;color:var(--ink-soft);min-height:1.2em}
+
+/* ---------- step 2: restaurants ---------- */
+.head-row{display:flex;justify-content:space-between;align-items:flex-end;gap:16px;flex-wrap:wrap;margin-bottom:26px}
+.head-row .lead{margin-top:10px}
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(270px,1fr));gap:18px}
+.spot{position:relative;text-align:left;border:0;padding:0;cursor:pointer;background:#fff;border-radius:var(--r);overflow:hidden;
+  box-shadow:0 0 0 1.5px var(--line);transition:transform .25s cubic-bezier(.2,.9,.25,1.2), box-shadow .25s;display:flex;flex-direction:column}
+.spot:hover{transform:translateY(-4px) rotate(-.4deg);box-shadow:0 0 0 1.5px var(--ink), 0 18px 40px -18px rgba(30,27,58,.4)}
+.spot.picked{box-shadow:0 0 0 3px var(--pink), 0 18px 40px -16px rgba(255,61,127,.55)}
+.spot .ph{position:relative;aspect-ratio:4/3;overflow:hidden;background:#f3e6df}
+.spot img{width:100%;height:100%;object-fit:cover;display:block;transition:transform .6s ease}
+.spot:hover img{transform:scale(1.05)}
+.spot .num{position:absolute;top:12px;left:12px;background:rgba(255,255,255,.92);backdrop-filter:blur(6px);border-radius:999px;padding:5px 10px;font-family:var(--mono);font-size:11px;font-weight:700;letter-spacing:.06em}
+.spot .tick{position:absolute;top:10px;right:10px;width:36px;height:36px;border-radius:50%;background:var(--pink);color:#fff;display:grid;place-items:center;font-size:18px;font-weight:800;transform:scale(0);transition:transform .3s cubic-bezier(.2,.9,.25,1.5)}
+.spot.picked .tick{transform:scale(1)}
+.spot .body{padding:16px 18px 18px;display:flex;flex-direction:column;gap:8px;flex:1}
+.spot h3{font-family:var(--display);font-size:22px;letter-spacing:-.02em;margin:0;line-height:1.05}
+.spot .area{font-family:var(--mono);font-size:11px;letter-spacing:.08em;text-transform:uppercase;color:var(--ink-soft)}
+.spot p{margin:0;font-size:15px;line-height:1.45;color:var(--ink-soft)}
+.tags{display:flex;gap:6px;flex-wrap:wrap;margin-top:auto;padding-top:6px}
+.tag{font-size:12px;font-weight:600;padding:4px 10px;border-radius:999px;background:#FFF1EA;color:var(--ink)}
+.spot:nth-child(3n+2) .tag{background:#E4F6F4}
+.spot:nth-child(3n) .tag{background:#FFF4D6}
+.surprise{display:flex;flex-direction:column;justify-content:center;align-items:flex-start;gap:10px;padding:26px;background:var(--ink);color:#fff;box-shadow:none}
+.surprise h3{font-size:26px}
+.surprise p{color:rgba(255,255,255,.72)}
+.surprise .big{font-size:44px;line-height:1}
+.surprise:hover{box-shadow:0 18px 40px -18px rgba(30,27,58,.6)}
+
+/* ---------- step 3: details ---------- */
+.details{display:grid;grid-template-columns:1fr 1fr;gap:clamp(20px,4vw,44px)}
+.q{margin-bottom:26px}
+.q label.qt,.q .qt{display:block;font-family:var(--display);font-weight:700;font-size:20px;letter-spacing:-.02em;margin-bottom:12px}
+.chips{display:flex;flex-wrap:wrap;gap:8px}
+.chip{border:0;cursor:pointer;padding:11px 16px;border-radius:14px;background:#fff;box-shadow:0 0 0 1.5px var(--line) inset;font-weight:600;font-size:15px;text-align:left;transition:all .18s}
+.chip small{display:block;font-weight:500;font-size:12px;color:var(--ink-soft);margin-top:2px}
+.chip:hover{box-shadow:0 0 0 1.5px var(--ink) inset}
+.chip[aria-pressed="true"]{background:var(--ink);color:#fff;box-shadow:none}
+.chip[aria-pressed="true"] small{color:rgba(255,255,255,.7)}
+textarea{width:100%;min-height:96px;resize:vertical;border:0;border-radius:16px;padding:14px 16px;font:inherit;font-size:16px;background:#fff;box-shadow:0 0 0 1.5px var(--line) inset;color:var(--ink)}
+textarea:focus{outline:none;box-shadow:0 0 0 2px var(--pink) inset}
+.chosen{border-radius:var(--r);overflow:hidden;position:relative;min-height:280px;background:#eee;align-self:start}
+.chosen img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
+.chosen .cap{position:absolute;left:0;right:0;bottom:0;padding:60px 20px 18px;background:linear-gradient(transparent, rgba(20,16,40,.85));color:#fff}
+.chosen .cap small{font-family:var(--mono);font-size:11px;letter-spacing:.1em;text-transform:uppercase;opacity:.8}
+.chosen .cap div{font-family:var(--display);font-weight:800;font-size:28px;letter-spacing:-.02em;margin-top:4px}
+.chosen .change{position:absolute;top:12px;right:12px;border:0;cursor:pointer;background:rgba(255,255,255,.92);border-radius:999px;padding:8px 14px;font-size:13px;font-weight:700}
+.row-end{display:flex;justify-content:space-between;align-items:center;gap:12px;flex-wrap:wrap;margin-top:8px}
+.btn-primary{background:var(--ink);color:#fff}
+.btn-primary:disabled{opacity:.35;cursor:not-allowed}
+.btn-ghost{background:transparent;box-shadow:0 0 0 1.5px var(--line) inset}
+.hint{font-size:14px;color:var(--ink-soft)}
+
+/* ---------- step 4: ticket ---------- */
+.final{display:grid;grid-template-columns:1fr 1fr;gap:clamp(20px,4vw,48px);align-items:center}
+.ticket{position:relative;background:#fff;border-radius:24px;box-shadow:0 0 0 1.5px var(--ink), 0 24px 50px -24px rgba(30,27,58,.5);overflow:hidden;transform:rotate(-1.5deg)}
+.ticket .top{background:var(--pink);color:#fff;padding:18px 22px;display:flex;justify-content:space-between;align-items:center;gap:12px;flex-wrap:wrap;font-family:var(--mono);font-size:12px;letter-spacing:.12em;text-transform:uppercase;font-weight:700}
+.ticket .tb{padding:20px 22px 22px;display:grid;grid-template-columns:1fr 1fr;gap:16px 18px}
+.ticket .f small{display:block;font-family:var(--mono);font-size:10px;letter-spacing:.12em;text-transform:uppercase;color:var(--ink-soft);margin-bottom:4px}
+.ticket .f b{font-family:var(--display);font-size:20px;letter-spacing:-.02em;line-height:1.1;display:block}
+.ticket .f.wide{grid-column:1/-1}
+.ticket .perf{height:0;border-top:2px dashed var(--line);margin:0 22px;position:relative}
+.ticket .perf:before,.ticket .perf:after{content:"";position:absolute;top:-13px;width:24px;height:24px;border-radius:50%;background:var(--paper);box-shadow:0 0 0 1.5px var(--ink) inset}
+.ticket .perf:before{left:-35px}.ticket .perf:after{right:-35px}
+.ticket .stub{padding:14px 22px 18px;display:flex;justify-content:space-between;align-items:center;gap:10px;font-family:var(--mono);font-size:12px;color:var(--ink-soft)}
+.barcode{height:34px;width:120px;background:repeating-linear-gradient(90deg,var(--ink) 0 2px,transparent 2px 4px,var(--ink) 4px 5px,transparent 5px 8px,var(--ink) 8px 11px,transparent 11px 13px)}
+.send{display:flex;flex-direction:column;gap:14px;align-items:flex-start}
+.btn-ig{display:inline-flex;align-items:center;gap:10px;text-decoration:none;color:#fff;
+  background:linear-gradient(45deg,#F58529,#DD2A7B 45%,#8134AF 75%,#515BD4);box-shadow:0 12px 28px -10px rgba(221,42,123,.7);padding:18px 28px;font-size:18px}
+.btn-ig svg{width:22px;height:22px}
+.steps-mini{margin:4px 0 0;padding:0;list-style:none;display:grid;gap:8px;font-size:15px;color:var(--ink-soft)}
+.steps-mini li{display:flex;gap:10px;align-items:baseline}
+.steps-mini li span{font-family:var(--mono);font-size:12px;font-weight:700;color:var(--pink)}
+.copied{font-size:14px;font-weight:600;color:var(--teal);min-height:1.3em}
+.msg-preview{width:100%;font-family:var(--mono);font-size:13px;line-height:1.55;background:#fff;border-radius:14px;padding:14px 16px;box-shadow:0 0 0 1.5px var(--line) inset;white-space:pre-wrap;word-break:break-word;color:var(--ink)}
+
+/* ---------- toast / confetti ---------- */
+.toast{position:fixed;left:50%;bottom:max(24px, env(safe-area-inset-bottom));transform:translate(-50%,140%);background:var(--ink);color:#fff;padding:12px 18px;border-radius:14px;font-weight:600;font-size:15px;z-index:50;transition:transform .35s cubic-bezier(.2,.9,.25,1.3);max-width:calc(100% - 32px);text-align:center}
+.toast.show{transform:translate(-50%,0)}
+#confetti{position:fixed;inset:0;pointer-events:none;z-index:40;width:100%;height:100%}
+
+footer{position:relative;z-index:1;text-align:center;margin-top:22px;font-size:13px;color:var(--ink-soft)}
+
+@media (max-width:760px){
+  .ask,.details,.final{grid-template-columns:1fr}
+  .arena{min-height:280px}
+  .chosen{min-height:220px;order:-1}
+  .ticket{transform:none}
+}
+@media (prefers-reduced-motion:reduce){
+  *,*:before,*:after{animation:none!important;transition:none!important}
+}
+</style>
+</head>
+<body>
+
+<div class="kites" id="kites" aria-hidden="true"></div>
+<canvas id="confetti" aria-hidden="true"></canvas>
+
+<main>
+  <div class="brand">
+    <span>Official invitation · <b>Ahmedabad</b></span>
+    <span class="dots" id="dots"><i class="on"></i><i></i><i></i><i></i></span>
+  </div>
+
+  <!-- STEP 1 — the question -->
+  <section class="step active" id="s1">
+    <div class="card ask">
+      <div>
+        <p class="eyebrow" id="greet">Hey you. Yes, you.</p>
+        <h1>Will you go out with me <span class="pink">this Saturday?</span></h1>
+        <p class="lead">I've thought about this carefully, made a website about it, and I'm told this is <span class="hl">completely normal behaviour</span>.</p>
+        <div class="date-chip"><span class="cal">3</span> Saturday, 3 October · Ahmedabad</div>
+      </div>
+      <div class="arena" id="arena">
+        <div class="arena-inner">
+          <div class="arena-q">So… what do you say?</div>
+          <div class="btns" id="btns">
+            <button class="btn btn-yes" id="yesBtn" type="button">Yes 💘</button>
+            <button class="btn btn-no" id="noBtn" type="button">No</button>
+          </div>
+          <div class="nocount" id="nocount"></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- STEP 2 — restaurants -->
+  <section class="step" id="s2">
+    <div class="card">
+      <div class="head-row">
+        <div>
+          <p class="eyebrow">Great choice. Obviously.</p>
+          <h2>Now pick where we're eating</h2>
+          <p class="lead">Seven places I'd be happy at. Pick one. I will pretend I didn't secretly have a favourite.</p>
+        </div>
+      </div>
+      <div class="grid" id="grid"></div>
+    </div>
+  </section>
+
+  <!-- STEP 3 — details -->
+  <section class="step" id="s3">
+    <div class="card">
+      <p class="eyebrow">Almost done. Just the logistics.</p>
+      <h2 style="margin-bottom:28px">A few important questions</h2>
+      <div class="details">
+        <div>
+          <div class="q">
+            <span class="qt">What time?</span>
+            <div class="chips" data-key="time">
+              <button class="chip" type="button" data-v="1:00 PM (lunch)">1:00 PM<small>Lunch. Daylight. Very safe.</small></button>
+              <button class="chip" type="button" data-v="5:30 PM (coffee & sunset)">5:30 PM<small>Coffee + sunset</small></button>
+              <button class="chip" type="button" data-v="8:00 PM (dinner)">8:00 PM<small>Proper dinner</small></button>
+              <button class="chip" type="button" data-v="9:30 PM (late dinner)">9:30 PM<small>Ahmedabad hours</small></button>
+            </div>
+          </div>
+          <div class="q">
+            <span class="qt">Who's paying?</span>
+            <div class="chips" data-key="bill">
+              <button class="chip" type="button" data-v="You're paying">You, obviously</button>
+              <button class="chip" type="button" data-v="Split it">Split it</button>
+              <button class="chip" type="button" data-v="Rock paper scissors decides">Rock, paper, scissors</button>
+            </div>
+          </div>
+          <div class="q">
+            <span class="qt">Current mood?</span>
+            <div class="chips" data-key="mood">
+              <button class="chip" type="button" data-v="Excited">Excited 🤩</button>
+              <button class="chip" type="button" data-v="Hungry">Mostly hungry 🍕</button>
+              <button class="chip" type="button" data-v="Pretending to be chill">Pretending to be chill 😌</button>
+              <button class="chip" type="button" data-v="Only here for dessert">Only here for dessert 🍰</button>
+            </div>
+          </div>
+          <div class="q">
+            <label class="qt" for="note">Anything else? <span style="font-weight:500;color:var(--ink-soft);font-size:15px">(optional)</span></label>
+            <textarea id="note" placeholder="e.g. pick me up at 7:45, I don't eat onion, you owe me a Frooti…"></textarea>
+          </div>
+        </div>
+        <div class="chosen" id="chosen">
+          <img id="chosenImg" alt="">
+          <button class="change" type="button" id="changeSpot">Change place</button>
+          <div class="cap"><small>You picked</small><div id="chosenName"></div></div>
+        </div>
+      </div>
+      <div class="row-end">
+        <span class="hint" id="detailsHint">Pick a time to continue.</span>
+        <button class="btn btn-primary" id="toFinal" type="button" disabled>Lock it in →</button>
+      </div>
+    </div>
+  </section>
+
+  <!-- STEP 4 — ticket + send -->
+  <section class="step" id="s4">
+    <div class="card final">
+      <div class="ticket" id="ticket">
+        <div class="top"><span>Date pass · Admit 2</span><span>SAT 03 OCT</span></div>
+        <div class="tb">
+          <div class="f wide"><small>Venue</small><b id="tVenue"></b></div>
+          <div class="f"><small>Time</small><b id="tTime"></b></div>
+          <div class="f"><small>Bill</small><b id="tBill"></b></div>
+          <div class="f wide"><small>Mood on arrival</small><b id="tMood"></b></div>
+        </div>
+        <div class="perf"></div>
+        <div class="stub"><span id="tNo"></span><div class="barcode"></div></div>
+      </div>
+      <div class="send">
+        <p class="eyebrow">It's official 🎉</p>
+        <h2>Last step: send it to me</h2>
+        <ul class="steps-mini">
+          <li><span>01</span>Tap the button. Your answer gets copied.</li>
+          <li><span>02</span>Instagram opens on my DMs.</li>
+          <li><span>03</span>Paste, send, and act surprised on Saturday.</li>
+        </ul>
+        <a class="btn btn-ig" id="igBtn" href="#" target="_blank" rel="noopener">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1" fill="currentColor"/></svg>
+          Copy &amp; send on Instagram
+        </a>
+        <div class="copied" id="copied"></div>
+        <div class="msg-preview" id="msgPreview"></div>
+        <button class="btn btn-ghost" id="copyAgain" type="button" style="padding:10px 18px;font-size:14px">Copy message again</button>
+      </div>
+    </div>
+  </section>
+
+  <footer>Handmade with nerves and too much free time.</footer>
+</main>
+
+<div class="toast" id="toast" role="status" aria-live="polite"></div>
+
+<script>
+/* ================== CONFIG — edit me ================== */
+const CONFIG = {
+  instagram: "_tarang2602",   // without the @
+  friendName: ""                          // optional; or add ?to=Name to the link
+};
+/* ====================================================== */
+
+const SPOTS = [
+  { id:"patang", name:"Patang Hotel", area:"Ashram Road · Revolving restaurant", img:"photos/patang.jpg",
+    line:"221 ft up and it spins. If the conversation gets awkward, the view changes every few minutes.", tags:["Skyline","Fine dining"] },
+  { id:"neem", name:"Under the Neem Trees", area:"Bodakdev · Open air", img:"photos/neem.jpg",
+    line:"Fairy lights, real trees, no ceiling. Nature is basically my wingman here.", tags:["Outdoors","Rustic"] },
+  { id:"makeba", name:"The House of Makeba", area:"CG Road · Global menu", img:"photos/makeba.jpg",
+    line:"Mexican, Italian, Indian and pink chairs. For when you can't decide. Relatable.", tags:["Pure veg","Pretty"] },
+  { id:"secret", name:"The Secret Kitchen", area:"Sindhu Bhavan Road · Cozy", img:"photos/secret.jpg",
+    line:"Curtained booths. Very classified. Please don't tell anyone we went.", tags:["Pure veg","Cozy booths"] },
+  { id:"mocha", name:"Mocha Nikol", area:"Nikol · Café", img:"photos/mocha.jpg",
+    line:"Coffee, big windows, zero pressure. The low-key but still cute option.", tags:["Café","Chill"] },
+  { id:"lapatron", name:"La' Patron Café", area:"Bopal · Rooftop café", img:"photos/lapatron.jpg",
+    line:"Rooftop, skyline and cheese fondue. I rest my case.", tags:["Rooftop","Fondue"] },
+  { id:"vibe", name:"The Vibe", area:"Chandkheda · Rooftop", img:"photos/vibe.jpg",
+    line:"It's literally called The Vibe. The pressure is on them, not me.", tags:["Rooftop","Night views"] }
+];
+
+const NO_LINES = [
+  "Are you sure?", "Really sure?", "Think again 🤔", "Wrong button",
+  "My mom already said yes", "The biryani will be sad", "Error 404: No not found",
+  "You're hurting the kites", "Okay but what if yes", "Fine, yes 🙄"
+];
+
+const state = { noTries:0, spot:null, time:null, bill:null, mood:null, note:"" };
+const $ = s => document.querySelector(s);
+const params = new URLSearchParams(location.search);
+const hashName = decodeURIComponent(location.hash.slice(1)).replace(/[-_]/g," ");
+const friend = (params.get("to") || hashName || CONFIG.friendName || "").trim();
+if (friend) $("#greet").textContent = `Hey ${friend}. Yes, you.`;
+
+/* ---------- kites ---------- */
+(function makeKites(){
+  const cols = ["#FF3D7F","#FFB627","#11A39C","#1E1B3A","#FF7A45"];
+  const box = $("#kites");
+  const n = innerWidth < 600 ? 5 : 9;
+  for (let i=0;i<n;i++){
+    const c1 = cols[i%cols.length], c2 = cols[(i+2)%cols.length];
+    const k = document.createElement("div");
+    k.className = "kite";
+    k.style.left = (Math.random()*92)+"%";
+    k.style.top = (Math.random()*80)+"%";
+    k.style.setProperty("--s", (28+Math.random()*40)+"px");
+    k.style.setProperty("--d", (9+Math.random()*10)+"s");
+    k.style.animationDelay = (-Math.random()*10)+"s";
+    k.style.opacity = .35 + Math.random()*.4;
+    k.innerHTML = `<svg viewBox="0 0 60 120"><path d="M30 2 L58 32 L30 70 L2 32 Z" fill="${c1}"/><path d="M30 2 L30 70 L2 32 Z" fill="${c2}" opacity=".85"/><path d="M2 32 H58" stroke="#fff" stroke-width="1.2" opacity=".6"/><path d="M30 70 q-8 14 2 24 t-4 26" stroke="#1E1B3A" stroke-width="1" fill="none" opacity=".5"/><path d="M26 72 l4 6 l4 -6 z" fill="${c2}"/></svg>`;
+    box.appendChild(k);
+  }
+})();
+
+/* ---------- step nav ---------- */
+function go(n){
+  document.querySelectorAll(".step").forEach((s,i)=>s.classList.toggle("active", i===n-1));
+  document.querySelectorAll("#dots i").forEach((d,i)=>d.classList.toggle("on", i<n));
+  scrollTo({top:0, behavior:"smooth"});
+}
+
+/* ---------- the runaway No ---------- */
+const noBtn = $("#noBtn"), yesBtn = $("#yesBtn"), arena = $("#arena");
+let lastDodge = -1e9;
+function dodge(e){
+  if (state.noTries >= NO_LINES.length-1) return; // it gave up
+  if (e) e.preventDefault();
+  if (performance.now() - lastDodge < 350) return; // hover + click on the same attempt
+  lastDodge = performance.now();
+  state.noTries++;
+  noBtn.textContent = NO_LINES[Math.min(state.noTries-1, NO_LINES.length-1)];
+  if (!noBtn.classList.contains("loose")){
+    const r = noBtn.getBoundingClientRect(), a = arena.getBoundingClientRect();
+    noBtn.classList.add("loose");
+    noBtn.style.left = (r.left-a.left)+"px"; noBtn.style.top = (r.top-a.top)+"px";
+    arena.appendChild(noBtn);
+  }
+  requestAnimationFrame(()=>{
+    const a = arena.getBoundingClientRect(), b = noBtn.getBoundingClientRect(), y = yesBtn.getBoundingClientRect();
+    let x, yy, tries = 0;
+    do {
+      x = 8 + Math.random()*Math.max(0, a.width - b.width - 16);
+      yy = 8 + Math.random()*Math.max(0, a.height - b.height - 16);
+      tries++;
+    } while (tries < 20 && overlaps(x+a.left, yy+a.top, b.width, b.height, y));
+    noBtn.style.left = Math.max(8, Math.min(x, a.width - b.width - 8))+"px";
+    noBtn.style.top = Math.max(8, Math.min(yy, a.height - b.height - 8))+"px";
+  });
+  const grow = Math.min(1 + state.noTries*0.09, 1.7);
+  yesBtn.style.setProperty("--grow", grow);
+  $("#nocount").textContent = state.noTries === 1 ? "The No button is shy." :
+    `No attempts: ${state.noTries}. This is being reported.`;
+  if (state.noTries >= NO_LINES.length-1){
+    noBtn.textContent = NO_LINES[NO_LINES.length-1];
+    noBtn.style.background = "var(--marigold)";
+    $("#nocount").textContent = "The No button has given up. Respect.";
+  }
+}
+function overlaps(x,y,w,h,r){ const p=14; return !(x+w+p<r.left || x-p>r.right || y+h+p<r.top || y-p>r.bottom); }
+noBtn.addEventListener("pointerenter", e => { if (e.pointerType === "mouse") dodge(); });
+noBtn.addEventListener("click", e => {
+  if (state.noTries >= NO_LINES.length-1){ sayYes(); return; }
+  dodge(e);
+});
+yesBtn.addEventListener("click", sayYes);
+
+function sayYes(){
+  burst();
+  toast(state.noTries ? `Yes! (after ${state.noTries} attempt${state.noTries>1?"s":""} at No, but who's counting. Me. I am.)` : "YES! Knew it. 💘");
+  setTimeout(()=>go(2), 650);
+}
+
+/* ---------- restaurants ---------- */
+const grid = $("#grid");
+SPOTS.forEach((s,i)=>{
+  const b = document.createElement("button");
+  b.type = "button"; b.className = "spot"; b.dataset.id = s.id;
+  b.innerHTML = `<div class="ph"><img src="${s.img}" alt="${s.name}" loading="lazy"><span class="num">OPTION ${i+1}</span><span class="tick">✓</span></div>
+    <div class="body"><span class="area">${s.area}</span><h3>${s.name}</h3><p>${s.line}</p>
+    <div class="tags">${s.tags.map(t=>`<span class="tag">${t}</span>`).join("")}</div></div>`;
+  b.addEventListener("click", ()=>pickSpot(s.id));
+  grid.appendChild(b);
+});
+const sur = document.createElement("button");
+sur.type = "button"; sur.className = "spot surprise";
+sur.innerHTML = `<span class="big">🎲</span><h3>Can't decide?</h3><p>Let fate pick. Fate has good taste. Mostly.</p>`;
+sur.addEventListener("click", ()=>{
+  const cards = [...grid.querySelectorAll(".spot:not(.surprise)")];
+  let i = 0, spins = 14 + Math.floor(Math.random()*7);
+  const t = setInterval(()=>{
+    cards.forEach(c=>c.classList.remove("picked"));
+    cards[i % cards.length].classList.add("picked");
+    if (--spins <= 0){ clearInterval(t); setTimeout(()=>pickSpot(cards[i % cards.length].dataset.id), 450); }
+    i++;
+  }, 110);
+});
+grid.appendChild(sur);
+
+function pickSpot(id){
+  state.spot = SPOTS.find(s=>s.id===id);
+  grid.querySelectorAll(".spot").forEach(c=>c.classList.toggle("picked", c.dataset.id===id));
+  $("#chosenImg").src = state.spot.img; $("#chosenImg").alt = state.spot.name;
+  $("#chosenName").textContent = state.spot.name;
+  setTimeout(()=>go(3), 380);
+}
+$("#changeSpot").addEventListener("click", ()=>go(2));
+
+/* ---------- details ---------- */
+document.querySelectorAll(".chips").forEach(group=>{
+  group.addEventListener("click", e=>{
+    const chip = e.target.closest(".chip"); if (!chip) return;
+    group.querySelectorAll(".chip").forEach(c=>c.setAttribute("aria-pressed", c===chip));
+    state[group.dataset.key] = chip.dataset.v;
+    refreshDetails();
+  });
+});
+function refreshDetails(){
+  const ok = !!state.time;
+  $("#toFinal").disabled = !ok;
+  $("#detailsHint").textContent = ok ? "Looking good. Very official." : "Pick a time to continue.";
+}
+$("#toFinal").addEventListener("click", ()=>{
+  state.note = $("#note").value.trim();
+  buildFinal(); go(4); burst();
+});
+
+/* ---------- final ---------- */
+function message(){
+  const who = friend ? `${friend} here. ` : "";
+  let m = `${who}YES 💘\n\n📅 Saturday, 3 October\n📍 ${state.spot.name}\n🕐 ${state.time}`;
+  if (state.bill) m += `\n💸 ${state.bill}`;
+  if (state.mood) m += `\n😊 Mood: ${state.mood}`;
+  if (state.note) m += `\n📝 ${state.note}`;
+  m += state.noTries ? `\n\n(I tried to press No ${state.noTries} time${state.noTries>1?"s":""}. It ran away.)` : `\n\n(Said yes on the first try, obviously.)`;
+  return m;
+}
+function buildFinal(){
+  $("#tVenue").textContent = state.spot.name;
+  $("#tTime").textContent = state.time.replace(/\s*\(.*\)/, "");
+  $("#tBill").textContent = state.bill ? state.bill.replace("Rock paper scissors decides","RPS") : "TBD";
+  $("#tMood").textContent = state.mood || "Classified";
+  $("#tNo").textContent = `NO-ATTEMPTS: ${String(state.noTries).padStart(2,"0")}`;
+  $("#msgPreview").textContent = message();
+  const u = CONFIG.instagram.replace(/^@/,"");
+  $("#igBtn").href = `https://ig.me/m/${encodeURIComponent(u)}`;
+}
+async function copyMsg(){
+  const txt = message();
+  try { await navigator.clipboard.writeText(txt); return true; }
+  catch {
+    const ta = document.createElement("textarea"); ta.value = txt; ta.setAttribute("readonly","");
+    ta.style.position="fixed"; ta.style.opacity="0"; document.body.appendChild(ta); ta.select();
+    let ok = false; try { ok = document.execCommand("copy"); } catch {}
+    ta.remove(); return ok;
+  }
+}
+$("#igBtn").addEventListener("click", async ()=>{
+  const ok = await copyMsg();
+  $("#copied").textContent = ok ? "✓ Copied! Now paste it in the chat and hit send." : "Couldn't copy automatically. Long-press the message below to copy it.";
+});
+$("#copyAgain").addEventListener("click", async ()=>{
+  const ok = await copyMsg();
+  toast(ok ? "Copied ✓" : "Long-press the message to copy it");
+});
+
+/* ---------- toast ---------- */
+let tt;
+function toast(t){ const el=$("#toast"); el.textContent=t; el.classList.add("show"); clearTimeout(tt); tt=setTimeout(()=>el.classList.remove("show"), 3200); }
+
+/* ---------- confetti (hearts + kites) ---------- */
+const cv = $("#confetti"), cx = cv.getContext("2d"); let parts = [], raf;
+function size(){ cv.width = innerWidth*devicePixelRatio; cv.height = innerHeight*devicePixelRatio; }
+size(); addEventListener("resize", size);
+function burst(){
+  if (matchMedia("(prefers-reduced-motion: reduce)").matches) return;
+  const cols = ["#FF3D7F","#FFB627","#11A39C","#FF7A45","#1E1B3A"];
+  for (let i=0;i<140;i++) parts.push({
+    x: innerWidth/2, y: innerHeight*0.45,
+    vx: (Math.random()-.5)*14, vy: -Math.random()*14-4,
+    r: 5+Math.random()*7, c: cols[i%cols.length], a: Math.random()*6, va:(Math.random()-.5)*.3,
+    s: Math.random()<.35 ? "heart" : "kite", life: 0
+  });
+  cancelAnimationFrame(raf); tick();
+  clearTimeout(burst.t); burst.t = setTimeout(()=>{ parts = []; cancelAnimationFrame(raf); cx.clearRect(0,0,cv.width,cv.height); }, 4500);
+}
+function tick(){
+  const d = devicePixelRatio; cx.clearRect(0,0,cv.width,cv.height);
+  parts.forEach(p=>{
+    p.vy += .32; p.vx *= .99; p.x += p.vx; p.y += p.vy; p.a += p.va; p.life++;
+    cx.save(); cx.translate(p.x*d, p.y*d); cx.rotate(p.a); cx.fillStyle = p.c; const r = p.r*d;
+    cx.beginPath();
+    if (p.s==="heart"){ cx.moveTo(0,r*.3); cx.bezierCurveTo(-r,-r*.5,-r*.4,-r*1.2,0,-r*.5); cx.bezierCurveTo(r*.4,-r*1.2,r,-r*.5,0,r*.3); }
+    else { cx.moveTo(0,-r); cx.lineTo(r*.7,0); cx.lineTo(0,r*1.1); cx.lineTo(-r*.7,0); }
+    cx.fill(); cx.restore();
+  });
+  parts = parts.filter(p=>p.y < innerHeight+40 && p.life < 260);
+  if (parts.length) raf = requestAnimationFrame(tick); else cx.clearRect(0,0,cv.width,cv.height);
+}
+</script>
+</body>
+</html>
